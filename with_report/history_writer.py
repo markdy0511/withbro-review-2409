@@ -39,7 +39,7 @@ def writer(history_df, group_period, period):
     history_chain = history_prompt | strict_llm | StrOutputParser()
 
     for key, his_list in history_set.items():
-        if key == "NaN":
+        if key == "NaN" or key == "nan":
             pass
         else:
             st.subheader(key)
