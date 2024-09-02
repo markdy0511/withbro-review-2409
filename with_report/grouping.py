@@ -117,7 +117,14 @@ def grouped_media_kwrd(df, metric_set, group_period):
 
     return grouped_df
 
-def grouped_ga_kwrd(df, metric_set, group_period):            
+def grouped_ga_kwrd(df, metric_set, group_period):
+    if df.empty:
+        # Create an empty DataFrame with the expected columns
+        target_list_ga = metric_set["trans_ga_metric"]
+        empty_df = pd.DataFrame(columns=['매체','캠페인','광고그룹','소재명/키워드', group_period] + target_list_ga)
+        empty_df.set_index(['매체','캠페인','광고그룹','소재명/키워드', group_period], inplace=True)
+        return empty_df
+    
     target_list_ga = metric_set["trans_ga_metric"]
 
     df_no_index = df.reset_index(drop=True)
