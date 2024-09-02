@@ -19,7 +19,6 @@ def writer(history_df, group_period, period):
             if row['매체'] is None:
                 pass
             else:
-                st.write(type(row['매체']))
                 history_set[row['매체']] = [[row[group_period], row['운영 히스토리']]]
         else:
             history_set[row['매체']].append([row[group_period], row['운영 히스토리']])
