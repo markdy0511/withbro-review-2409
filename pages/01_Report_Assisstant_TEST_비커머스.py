@@ -600,6 +600,7 @@ if st.session_state.trans_metric_set:
 
         with history:
             st.write(st.session_state.df_set['used_history'])
+            fillna_df = st.session_state.df_set['used_history'].fillna('기타')
 
             st.subheader("지난 기간 : " + st.session_state.period_set["pre"])
             pre_history = history_writer.writer(
