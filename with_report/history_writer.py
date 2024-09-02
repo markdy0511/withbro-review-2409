@@ -13,15 +13,11 @@ strict_llm = ChatOpenAI(
 
 def writer(history_df, group_period, period):
     period_data = history_df[history_df[group_period] == period]
-    period_data = period_data.fillna('기타')
    
     history_set = {}
     for index, row in period_data.iterrows():
         if row['매체'] not in history_set.keys():
-            if row['매체'] is None:
-                pass
-            else:
-                history_set[row['매체']] = [[row[group_period], row['운영 히스토리']]]
+            history_set[row['매체']] = [[row[group_period], row['운영 히스토리']]]
         else:
             history_set[row['매체']].append([row[group_period], row['운영 히스토리']])
 
