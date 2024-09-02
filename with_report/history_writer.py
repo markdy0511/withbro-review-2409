@@ -2,6 +2,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 import streamlit as st
 from langchain.schema import StrOutputParser
+import pandas as pd
 
 
 strict_llm = ChatOpenAI(
@@ -18,6 +19,7 @@ def writer(history_df, group_period, period):
             if row['매체'] is None:
                 pass
             else:
+                st.write(type(row['매체']))
                 history_set[row['매체']] = [[row[group_period], row['운영 히스토리']]]
         else:
             history_set[row['매체']].append([row[group_period], row['운영 히스토리']])
@@ -44,7 +46,7 @@ def writer(history_df, group_period, period):
     for key, his_list in history_set.items():
         st.subheader(key)
         for ep in his_list:
-            st.write(ep[1])
+            st.write("● " + ep[1])
     history_description = "history :\n\n"
     history_description += period_data.to_string()
     descript_his = history_chain.invoke(
