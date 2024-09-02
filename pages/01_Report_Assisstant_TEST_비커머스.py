@@ -604,14 +604,14 @@ if st.session_state.trans_metric_set:
 
             st.subheader("지난 기간 : " + st.session_state.period_set["pre"])
             pre_history = history_writer.writer(
-                st.session_state.df_set['used_history'],
+                fillna_df,
                 grouping_period,
                 st.session_state.period_set["pre"])
             st.write('※ ',pre_history)
 
             st.subheader("이번 기간 : " + st.session_state.period_set["now"])
             now_history = history_writer.writer(
-                st.session_state.df_set['used_history'],
+                fillna_df,
                 grouping_period,
                 st.session_state.period_set["now"]
             )
