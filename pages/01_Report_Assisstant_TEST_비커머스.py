@@ -606,7 +606,7 @@ if st.session_state.trans_metric_set:
                 st.session_state.df_set['used_history'],
                 grouping_period,
                 st.session_state.period_set["pre"])
-            st.write(pre_history)
+            st.write('※ ',pre_history)
 
             st.write("이번 기간 : ", st.session_state.period_set["now"])
             now_history = history_writer.writer(
@@ -614,7 +614,7 @@ if st.session_state.trans_metric_set:
                 grouping_period,
                 st.session_state.period_set["now"]
             )
-            st.write(now_history)
+            st.write('※ ',now_history)
 
         with preview:
             st.write("MMM-EE Coming soon")
