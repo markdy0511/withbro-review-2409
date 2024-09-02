@@ -41,8 +41,9 @@ def writer(history_df, group_period, period):
             """
         )
     history_chain = history_prompt | strict_llm | StrOutputParser()
-    st.write(key.__class__)
+    
     for key, his_list in history_set.items():
+        st.write(key.__class__)
         st.subheader(key)
         for ep in his_list:
             st.write("● " + ep[1])
