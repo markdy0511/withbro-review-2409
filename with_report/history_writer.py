@@ -13,6 +13,8 @@ strict_llm = ChatOpenAI(
 
 def writer(history_df, group_period, period):
     period_data = history_df[history_df[group_period] == period]
+    period_data = period_data.fillna('기타')
+   
     history_set = {}
     for index, row in period_data.iterrows():
         if row['매체'] not in history_set.keys():
@@ -41,9 +43,8 @@ def writer(history_df, group_period, period):
             """
         )
     history_chain = history_prompt | strict_llm | StrOutputParser()
-    
+
     for key, his_list in history_set.items():
-        st.write(type(key))
         st.subheader(key)
         for ep in his_list:
             st.write("● " + ep[1])
