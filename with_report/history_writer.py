@@ -15,10 +15,9 @@ def writer(history_df, group_period, period):
     history_set = {}
     for index, row in period_data.iterrows():
         if row['매체'] not in history_set.keys():
-            history_set[row['매체']] = [row[group_period], row['운영 히스토리']]
+            history_set[row['매체']] = [[row[group_period], row['운영 히스토리']]]
         else:
             history_set[row['매체']].append([row[group_period], row['운영 히스토리']])
-    st.write(history_set)
 
     history_prompt = ChatPromptTemplate.from_template(
                 """
@@ -40,9 +39,12 @@ def writer(history_df, group_period, period):
     history_chain = history_prompt | strict_llm | StrOutputParser()
 
     for key, his_list in history_set.items():
-        st.subheader(key)
-        for ep in his_list:
-            st.write(ep)
+        if key == "NaN":
+            pass
+        else:
+            st.subheader(key)
+            for ep in his_list:
+                st.write(ep[1])
     history_description = "history :\n\n"
     history_description += period_data.to_string()
     descript_his = history_chain.invoke(
